@@ -1,0 +1,26 @@
+<div id="modal-header" class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="cancel()">&times;</button>
+
+    <h4><strong>Session decline confirmation</strong></h4>
+</div>
+<form name="form" parsley-validate submit-valid-only="decline()" novalidate>
+    <div class="modal-body bg-gray no-border">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="alert alert-error" ng-show="errorMessage">
+                    {{ errorMessage }}
+                </div>
+
+                Please confirm that you really want to decline following session:
+
+                <p>{{ name }}</p>
+                <p>{{ description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+        <button class="btn btn-primary" type="submit">Decline</button>
+    </div>
+</form>

@@ -1,0 +1,42 @@
+<div class="col-md-3 col-sm-3">
+    <div class="user-profile-pic">
+        <img alt="" height="69" width="69"
+             ng-file-drop="onProfileImageFileSelect($files);"
+             ng-file-drop-available="dropSupported=true"
+             ng-file-drag-over-class="drag-over"
+             ng-src="{{ profile.profileImageUrl || '/assets/img/default-avatar.png' }}">
+    </div>
+
+    <div class="user-mini-description m-b-sm">
+        <h3 class="text-success semi-bold">{{ profile.followers || 0}}</h3>
+
+        <h5>Followers</h5>
+
+        <h3 class="text-success semi-bold">{{ profile.following || 0}}</h3>
+
+        <h5>Following</h5>
+    </div>
+</div>
+
+<div class="col-md-8 user-description-box col-sm-8">
+    <button type="button" class="btn btn-primary btn-small pull-right"
+            ng-click="openProfileEditor()">
+        <i class="fa fa-edit"></i></button>
+    <h3 class="semi-bold">{{ profile.firstName }} {{ profile.lastName }}</h3>
+    <h6 class="no-margin" ng-show="getProfileInfo('title')">{{ getProfileInfo('title') }}</h6>
+    <br>
+
+    <p ng-repeat="info in profile.info | filter: { type: '!title'}">
+        <i ng-show="info.value" class="fa fa-{{ info.type }} {{ info.type }}"></i>{{ info.value }}
+    </p>
+
+    <div class="force-wrap" ng-show="profile.bio && profile.bio != '<br>'">
+        <p ng-bind-html="profile.bio"></p>
+    </div>
+
+    <!--<p><i class="fa fa-briefcase"></i>CEO and developer</p>-->
+    <!--<p><i class="fa fa-globe"></i>Quotient.net</p>-->
+
+    <!--<p><i class="fa fa-file-o"></i>Print Schedule</p>-->
+    <!--<p><i class="fa fa-envelope"></i>Send Message</p>-->
+</div>

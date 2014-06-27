@@ -1,0 +1,17 @@
+<div ng-cloak>
+    <a hre="#" ng-click="toAlbums()">back</a>
+
+    <div>
+        {{album.title}}
+    </div>
+
+    <div id="photos" isotope-container ng-cloak class="ng-cloak">
+        <div ng-repeat="photo in photos">
+
+                        <img isotope-item ng-click="selectPhoto(photo)"
+                             data-original-title="{{photo.text}}"
+                             data-placement="bottom" ng-src="{{photo.src}}" class="preview pop-over" />
+
+        </div>
+    </div>
+</div>

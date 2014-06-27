@@ -1,0 +1,38 @@
+﻿<div ng-cloak>
+    <h1>Список тербанков</h1>
+
+    <div ng-hide="loaded" ng-cloak>
+        <center><h4>Loading&hellip;</h4></center>
+    </div>
+
+    <table class="table table-bordered" ng-show="loaded && pagination.totalCount > 1" ng-cloak>
+        <thead>
+        <tr>
+            <th>Код ЦЭ</th>
+            <th>Наименование</th>
+            <th>Город</th>
+            <th>Адрес</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="terbank in terbanks">
+            <td>{{ terbank.code }}</td>
+            <td>{{ terbank.title }}</td>
+            <td>{{ terbank.cityName }}</td>
+            <td>{{ terbank.address }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div ng-show="pagination.totalCount == 0">
+        <h4>No items found</h4>
+    </div>
+
+    <div ng-show="pagination.showPaging()" class="align-center">
+        <pagination total-items="pagination.totalCount" max-size="pagination.maxPageCount"
+                    items-per-page="pagination.filter.perPage" page="pagination.filter.page"
+                    on-select-page="selectPage(page)"
+                    class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+    </div>
+
+</div>

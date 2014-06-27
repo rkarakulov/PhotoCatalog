@@ -1,0 +1,43 @@
+@!(model)
+@if(model.currentUser){
+    <ul class="cbp_tmtimeline">
+        @for(var sessionIndex = 0; sessionIndex <  model.sessions.length; sessionIndex++){
+            @{sessionViewModel = model.sessions[sessionIndex]}
+            <li>
+                <time class="cbp_tmtime">
+                    <span class="date">@sessionViewModel.session.getDate()</span>
+                </time>
+                <div class="cbp_tmicon info animated bounceIn"><i class="fa fa-comments"></i></div>
+                <div class="cbp_tmlabel">
+                    <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
+                        <h4 class="inline m-b-5"><span class="text-success semi-bold uppercase">@sessionViewModel.session.eventName</span></h4>
+                        <h5 class="inline muted semi-bold m-b-5 uppercase">
+                            <a href="http://twitter.com/@sessionViewModel.session.handle">@sessionViewModel.session.handle</a>
+                        </h5>
+
+                        <div class="m-t-5 dark-text">@sessionViewModel.session.sessionName</div>
+                        <p class="muted">@sessionViewModel.session.sessionDescription</p>
+                        @if(sessionViewModel.sessionContents && sessionViewModel.sessionContents.length > 0){
+                            <div class="grid-body no-border">
+                                <h3>Session <span class="semi-bold">Collaterals</span></h3>
+                                <table class="table no-more-tables">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    @for(var sessionContentIndex = 0; sessionContentIndex <  sessionViewModel.sessionContents.length; sessionContentIndex++){
+                                        @{sessionContent = sessionViewModel.sessionContents[sessionContentIndex]}
+                                        <tr class="session-content-collection">
+                                            <td class="v-align-middle"><a href="@sessionContent.getUrl()" target="_blank">@sessionContent.fileName</a></td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </li>
+        }
+    </ul>
+}

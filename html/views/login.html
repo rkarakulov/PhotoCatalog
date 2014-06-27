@@ -1,0 +1,13 @@
+<div ng-cloak  class="row login-container">
+    <div class="col-md-5 col-md-offset-4"> <br>
+        <div class="alert alert-danger col-md-10" ng-show="error">
+            <strong>Произошла ошибка: </strong> {{error}}
+        </div>
+        <div class="alert alert-success col-md-10" ng-show="success">
+            {{success}}
+        </div>
+
+         <button ng-show="isVkontakte()" ng-click="login()" >Vk</button>
+
+    </div>
+</div>

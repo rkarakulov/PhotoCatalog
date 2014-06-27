@@ -1,0 +1,18 @@
+@!(model)
+
+<p>
+    Hi @model.eventSession.speakerFullName()!
+</p>
+<p>
+    @model.event.user.firstName @model.event.user.lastName added you as speaker in his job speakers list.
+</p>
+<p>
+    If you want to confirm request, please follow this
+    <a href="@model.acceptUrl">link</a>
+
+    to decline follow this
+    <a href="@model.declineUrl">link</a>
+</p>
+<p>
+    Thank you, SpeakerStack
+</p>

@@ -1,0 +1,49 @@
+@!(model)
+
+<div class="col-md-3 col-sm-3 m-b-sm">
+    <div class="user-profile-pic">
+        <img alt="" height="69" width="69" src="@(model.user.profileImageUrl || '/assets/img/default-avatar.png')">
+    </div>
+
+    <div class="user-mini-description">
+        <h3 class="text-success semi-bold">@(model.followers||0)</h3>
+
+        <h5>Followers</h5>
+
+        <h3 class="text-success semi-bold">@(model.following||0)</h3>
+
+        <h5>Following</h5>
+    </div>
+</div>
+
+<div class="col-md-8 user-description-box col-sm-8">
+    <h3 class="semi-bold">@model.user.firstName @model.user.lastName</h3>
+    @if(model.user.hasInfo('title')){
+        <h6 class="no-margin">@model.user.getInfo('title')</h6>
+    }
+    <br>
+    @{ types = model.user.getInfoTypes() }
+    @for(var typeIndex = 0; typeIndex < types.length; typeIndex++){
+        @{type = types[typeIndex]}
+        <p>
+            <i class="fa fa-@type @type"></i>
+            @model.user.getInfo(type)
+        </p>
+    }
+    @if(model.currentUser && model.user.email){
+        <p>
+            <a href="#" class="color-gray" ng-click="showContactModal()">
+                <i class="fa fa-envelope"></i>
+                Send Message
+            </a>
+        </p>
+    }
+    @if(!model.currentUser){
+        <p>
+            @{ loginUrl = '/login?redirectUrl=' + model.url }
+            <a href="@loginUrl" class="color-gray">
+                Login to see full account information.
+            </a>
+        </p>
+    }
+</div>

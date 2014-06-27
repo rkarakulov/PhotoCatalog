@@ -1,0 +1,5 @@
+﻿запрос вчера не правильный делали, нужно - 
+
+mongo OnlineRegistryDb --eval "db.Card.find({printStatusHasError: 'false'}).count()"
+
+mongo OnlineRegistryDb --eval "db.Card.distinct('printStatus', { printStatusHasError: 'true' })" >> 1.txt

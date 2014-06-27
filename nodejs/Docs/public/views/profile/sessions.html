@@ -1,0 +1,88 @@
+<ul class="cbp_tmtimeline" ng-controller="sessionController">
+    <li>
+        <div class="cbp_tmicon primary animated bounceIn"><i class="fa fa-plus-circle"></i></div>
+        <div class="cbp_tmlabel">
+            <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
+                <button type="button" class="btn btn-success btn-cons" ng-click="add()">
+                    <i class="fa fa-plus-circle"></i>
+                    <span class="bold m-l-sm">Add Session</span>
+                </button>
+                <!-- this loads a modal and asks for the following items
+                Name of event
+                NAme of Session
+                Time/Date of Session
+                Address (use a single field for address for now)-->
+                <p class="muted"> Click here to make a new session in your timeline. </p>
+            </div>
+
+        </div>
+    </li>
+
+    <li ng-repeat="session in sessions">
+        <time class="cbp_tmtime">
+            <span class="date">{{getDate(session)}}</span>
+            <span class="time">{{getTime(session)}} <span class="semi-bold">{{getMeridian(session)}}</span></span>
+        </time>
+        <div class="cbp_tmicon info animated bounceIn"><i class="fa fa-comments"></i></div>
+        <div class="cbp_tmlabel">
+            <div class="pull-right m-r-sm m-t-sm actions" ng-hide="session.isDeclined">
+                <a href="#" class="fa fa-pencil" ng-click="update(session)"></a>
+                <a href="#" class="fa fa-trash-o" ng-click="remove(session)"></a>
+            </div>
+            <div class="pull-right m-r-sm m-t-sm actions" ng-show="session.isDeclined">
+                <span class="label label-important">Declined</span>
+            </div>
+            <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
+                <h4 class="inline m-b-5"><span class="text-success semi-bold uppercase">{{session.eventName}}</span></h4>
+                <h5 class="inline muted semi-bold m-b-5 uppercase">
+                    <a href="http://twitter.com/{{session.handle}}">{{session.handle}}</a>
+                </h5>
+
+                <div class="m-t-5 dark-text">{{session.sessionName}}</div>
+                <p class="muted" ng-bind-html="session.sessionDescription"></p>
+
+                <div ng-controller="sessionContentController" ng-hide="session.isDeclined">
+                    <button type="button" class="btn btn-success btn-cons" ng-click="create()">
+                        <i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;
+                        <span class="bold">Upload</span>
+                    </button>
+
+
+                    <div class="grid-body no-border" ng-init="init(session)" ng-if="sessionContents && sessionContents.length > 0">
+                    <h3>Session <span class="semi-bold">Collaterals</span></h3>
+                    <table class="table no-more-tables">
+                        <thead>
+                        <tr>
+                            <th style="width:50%">Name</th>
+                            <th class="text-center" style="width:10%">Privacy</th>
+                            <th class="text-center" style="width:10%">Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="sessionContent in sessionContents" class="session-content-collection">
+                            <td class="v-align-middle"><a href="{{getContentUrl(sessionContent)}}" target="_blank">{{sessionContent.fileName}}</a></td>
+
+                            <td class="text-center"><span class="muted">
+                                <a href="#" class="bg-gray"  ng-click="toggleProtectStatus(sessionContent)">
+                                    <i class="fa fa-lock big-default" ng-class="getProtectedClass(sessionContent)"></i>
+                                </a>
+                            </span>
+                            <td class="text-center">
+                                <span class="muted">
+                                    <a href="#" class="bg-gray" ng-click="remove(sessionContent)">
+                                        <i class="fa fa-trash-o big-default"></i>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </li>
+
+</ul>
+

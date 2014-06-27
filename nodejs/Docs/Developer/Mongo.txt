@@ -1,0 +1,5 @@
+Mongo testing
+
+mongoimport --db OnlineReestr --collection test1 --type csv --file test3.csv --headerline
+
+db.test111.renameCollection("test1")

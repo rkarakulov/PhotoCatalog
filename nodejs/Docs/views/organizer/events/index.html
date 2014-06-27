@@ -1,0 +1,77 @@
+@!(model)
+
+@function body() {
+<div ng-controller="eventController">
+    <div class="page-title">
+        <h3>Conference - <span class="semi-bold">Jobs</span></h3>
+    </div>
+    <div class="well well-large">
+        @render('./_create', model)
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="grid simple">
+
+                <div class="grid-title">
+                    <h4>Speaker <span class="semi-bold">Jobs</span></h4>
+
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="javascript:;" class="reload"></a>
+                    </div>
+                </div>
+                <div class="grid-body">
+
+                    <table class="table table-hover table-condensed" id="datatable">
+                        <thead>
+                        <tr>
+                            <th style="width:10%">Job Name</th>
+                            <th style="width:22%" data-hide="phone,tablet">Description</th>
+                            <th style="width:6%">Speaker Count</th>
+                            <th style="width:10%">Progress</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @for(var index = 0; index < model.events.length; index++)
+                        {
+                        @{ event = model.events[index] }
+
+                        <tr>
+                            <td class="v-align-middle">
+                                <a href="/showorg/@event.id" title="Job details">@event.name</a>
+                            </td>
+                            <td class="v-align-middle"><span class="muted">@event.description</span></td>
+                            <td><span class="muted">@event.speakersCount</span></td>
+                            <td class="v-align-middle">
+                                <div class="progress ">
+                                    <div data-percentage="@(event.completePercent)%"
+                                         class="progress-bar @translateCompletePercent(event.completePercent) animate-progress-bar"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@function translateCompletePercent(percent) {
+@if(percent <= 25) {
+progress-bar-danger
+}else if(percent <= 50) {
+progress-bar-warning
+}else if(percent <= 75) {
+progress-bar-primary
+}else{
+progress-bar-success
+}
+}
+
+@render('../../shared/organizer-layout', body, model)

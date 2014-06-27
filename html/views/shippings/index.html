@@ -1,0 +1,36 @@
+﻿<div ng-cloak>
+    <h1>Даты отгрузок</h1>
+
+    <div ng-hide="loaded" ng-cloak>
+        <center><h4>Loading&hellip;</h4></center>
+    </div>
+
+    <table class="table table-bordered" ng-show="loaded && pagination.totalCount" ng-cloak>
+        <thead>
+        <tr>
+            <th>Номер заказа</th>
+            <th>Наименование</th>
+            <th>Дата передачи в DHL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="shipping in shippings">
+            <td>{{ shipping.code }}</td>
+            <td>{{ shipping.title }}</td>
+            <td>{{ shipping.date | date:'dd.MM.yyyy' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div ng-show="pagination.totalCount == 0">
+        <h4>No items found</h4>
+    </div>
+
+    <div ng-show="pagination.showPaging()" class="align-center">
+        <pagination total-items="pagination.totalCount" max-size="pagination.maxPageCount"
+                    items-per-page="pagination.filter.perPage" page="pagination.filter.page"
+                    on-select-page="selectPage(page)"
+                    class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+    </div>
+
+</div>
