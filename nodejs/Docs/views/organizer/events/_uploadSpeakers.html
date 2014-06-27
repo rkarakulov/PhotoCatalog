@@ -1,8 +1,0 @@
-@!(model)
-
-<h4><span class="semi-bold">Speakers </span>will get notifications automatically. The progress of the speaker will be visible below. </h4>
-@if(!model.event.haveSpeakers()){
-    <a target="_self" href="/assets/others/speakers_templates.xlsx" class="btn btn-success btn-cons">Download Template</a>
-    <button type="button" class="btn btn-primary btn-cons" ng-click="upload()">Upload Speakers</button>
-}
-
