@@ -1,0 +1,14 @@
+<div ng-cloak class="ng-cloak fade-animate">
+    <div ng-repeat="album in albums">
+        <div ng-click="selectAlbum(album)">
+            <div style="margin: 10px">
+                {{album.title}}
+            </div>
+
+            <img ng-src="{{album.thumb_src}}" class="preview" />
+            {{album.size}}
+
+        </div>
+    </div>
+</div>
+
